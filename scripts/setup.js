@@ -20,6 +20,7 @@ const SOCIAL_PLATFORMS = [
   { name: 'Twitch', icon: 'twitch' },
   { name: 'WhatsApp', icon: 'whatsapp' },
   { name: 'TikTok', icon: 'tiktok' },
+  { name: 'Facebook', icon: 'facebook' },
 ];
 
 console.log('\n🚀 Welcome to Linkytree Setup Assistant\n');
