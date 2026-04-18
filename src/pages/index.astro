@@ -148,11 +148,6 @@ const jsonLd = {
       </form>
     </div>
 
-    <div id="successPanel" class="hidden text-center space-y-4">
-      <h2 class="text-xl font-semibold">Message sent 👍</h2>
-      <p class="text-white/70">Thanks! I’ll get back to you soon.</p>
-    </div>
-
     <div id="successPanel" class="hidden text-center space-y-4 transition-all duration-200">
       <h2 class="text-xl font-semibold">Message sent 👍</h2>
       <p class="text-white/70">Thanks! I’ll get back to you soon.</p>
@@ -230,31 +225,25 @@ const jsonLd = {
     const data = new FormData(form);
 
     try {
+      // Submit to Netlify's forms endpoint
       const res = await fetch("/", {
         method: "POST",
-        body: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
       });
 
-
       if (res.ok) {
-        // start fade-out
+        // Your existing success handling code...
         formContainer.classList.add('opacity-0');
-
         setTimeout(() => {
-          // fully hide form
           formContainer.classList.add('hidden');
-
-          // show success panel (start hidden + transparent)
           successPanel.classList.remove('hidden');
           successPanel.classList.add('opacity-0');
-
-          // trigger fade-in on next frame
           requestAnimationFrame(() => {
             successPanel.classList.remove('opacity-0');
             successPanel.classList.add('opacity-100');
           });
-        }, 200); // match your transition duration
-
+        }, 200);
       } else {
         throw new Error("Failed");
       }
@@ -265,8 +254,6 @@ const jsonLd = {
 
   closeAfterSuccess?.addEventListener('click', () => {
     closeModal();
-
-    // reset state after closing
     setTimeout(() => {
       successPanel.classList.add('hidden');
       formContainer.classList.remove('hidden');
