@@ -2,11 +2,9 @@
 
 A link-in-bio page built with **Astro** and **TailwindCSS**. It renders your profile, social links, and link cards from a single data file.
 
-![LinkyTree Preview](https://s3.us-east-1.amazonaws.com/gndx.dev/linkyTree.png)
-
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/gndx/linkytree)
 
-**Live at:** [linkytree.error427.com](https://linkytree.error427.com)
+**Live at:** [lasday.com](https://lasday.com)
 
 ## Stack
 
