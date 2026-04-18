@@ -1,27 +1,46 @@
 ---
 interface Props {
-  href: string;
+  href?: string; // 👈 now optional
   title: string;
   subtitle: string;
   trailingIcon?: string;
+  onClick?: string; // 👈 optional inline handler
 }
 
-const { href, title, subtitle, trailingIcon } = Astro.props;
+const { href, title, subtitle, trailingIcon, onClick } = Astro.props;
 ---
 
-<a
-  href={href}
-  target='_blank'
-  rel='noopener noreferrer'
-  class='link-card group flex items-center gap-4 w-full'
->
-  <div class='flex-1 min-w-0'>
-    <h3
-      class='font-display font-semibold text-foreground group-hover:text-primary transition-colors'
-    >
-      {title}
-    </h3>
-    <p class='text-sm text-muted-foreground truncate'>{subtitle}</p>
-  </div>
-  {trailingIcon && <span class='text-sm text-muted-foreground'>{trailingIcon}</span>}
-</a>
+{href ? (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="link-card group flex items-center gap-4 w-full"
+  >
+    <div class="flex-1 min-w-0">
+      <h3 class="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
+        {title}
+      </h3>
+      <p class="text-sm text-muted-foreground truncate">{subtitle}</p>
+    </div>
+    {trailingIcon && (
+      <span class="text-sm text-muted-foreground">{trailingIcon}</span>
+    )}
+  </a>
+) : (
+  <button
+    type="button"
+    class="link-card group flex items-center gap-4 w-full text-left"
+    id={onClick === 'openModal' ? 'openModal' : undefined}
+  >
+    <div class="flex-1 min-w-0">
+      <h3 class="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
+        {title}
+      </h3>
+      <p class="text-sm text-muted-foreground truncate">{subtitle}</p>
+    </div>
+    {trailingIcon && (
+      <span class="text-sm text-muted-foreground">{trailingIcon}</span>
+    )}
+  </button>
+)}

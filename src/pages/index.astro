@@ -78,10 +78,201 @@ const jsonLd = {
               />
             ))
           }
+
+        <LinkCard
+          title="Contact Me"
+          subtitle="Send me a message"
+          onClick="openModal"
+          icon="📧"
+          trailingIcon="📧"
+          style="background-color: rgba(250, 204, 21, 0.125); color: rgb(250, 204, 21);'"
+        />
+
         </div>
+
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="hidden"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input name="email" />
+          <textarea name="message"></textarea>
+        </form>
 
         <Footer />
       </div>
     </div>
   </div>
+
+<div
+  id="modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/0 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+  <div
+    id="modalContent"
+    class="bg-neutral-900 text-white w-full max-w-md p-6 rounded-2xl shadow-xl relative transform scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+
+      <button id="closeModal" class="absolute top-3 right-3 text-white/70 hover:text-white">
+        ✕
+      </button>
+
+    <h2 class="text-xl font-semibold mb-4">Send me a message</h2>
+
+    <div id="formContainer" class="transition-all duration-200">
+      <form name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+          class="w-full mb-3 p-2 rounded bg-black/30 border border-white/20"
+        />
+
+        <textarea
+          name="message"
+          placeholder="Message"
+          required
+          class="w-full h-48 mb-3 p-2 rounded bg-black/30 border border-white/20 resize-y"
+        ></textarea>
+
+        <button
+          type="submit"
+          class="w-full bg-white text-black font-medium p-2 rounded-lg hover:bg-white/90"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+
+    <div id="successPanel" class="hidden text-center space-y-4">
+      <h2 class="text-xl font-semibold">Message sent 👍</h2>
+      <p class="text-white/70">Thanks! I’ll get back to you soon.</p>
+    </div>
+
+    <div id="successPanel" class="hidden text-center space-y-4 transition-all duration-200">
+      <h2 class="text-xl font-semibold">Message sent 👍</h2>
+      <p class="text-white/70">Thanks! I’ll get back to you soon.</p>
+
+      <button
+        id="closeAfterSuccess"
+        class="mt-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-white/90"
+      >
+        Close
+      </button>
+    </div>
+
+    
+  </div>
+</div>
+
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const openBtn = document.getElementById('openModal');
+  const closeBtn = document.getElementById('closeModal');
+
+  function openModal() {
+    modal.classList.remove('pointer-events-none');
+
+    // trigger next frame so transition works
+    requestAnimationFrame(() => {
+      modal.classList.remove('opacity-0', 'bg-black/0');
+      modal.classList.add('opacity-100', 'bg-black/60');
+
+      modalContent.classList.remove('scale-95', 'opacity-0');
+      modalContent.classList.add('scale-100', 'opacity-100');
+    });
+  }
+
+  function closeModal() {
+    // fade out overlay
+    modal.classList.remove('opacity-100', 'bg-black/60');
+    modal.classList.add('opacity-0', 'bg-black/0');
+
+    // fade/scale out modal
+    modalContent.classList.remove('scale-100', 'opacity-100');
+    modalContent.classList.add('scale-95', 'opacity-0');
+
+    // AFTER animation, disable interaction
+    setTimeout(() => {
+      modal.classList.add('pointer-events-none');
+    }, 200); // match your duration
+  }
+
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });  
+
+</script>
+
+<script>
+  const form = document.querySelector('#modal form');
+  const formContainer = document.getElementById('formContainer');
+  const successPanel = document.getElementById('successPanel');
+  const closeAfterSuccess = document.getElementById('closeAfterSuccess');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        body: data,
+      });
+
+
+      if (res.ok) {
+        // start fade-out
+        formContainer.classList.add('opacity-0');
+
+        setTimeout(() => {
+          // fully hide form
+          formContainer.classList.add('hidden');
+
+          // show success panel (start hidden + transparent)
+          successPanel.classList.remove('hidden');
+          successPanel.classList.add('opacity-0');
+
+          // trigger fade-in on next frame
+          requestAnimationFrame(() => {
+            successPanel.classList.remove('opacity-0');
+            successPanel.classList.add('opacity-100');
+          });
+        }, 200); // match your transition duration
+
+      } else {
+        throw new Error("Failed");
+      }
+    } catch (err) {
+      alert("Something went wrong. Try again.");
+    }
+  });
+
+  closeAfterSuccess?.addEventListener('click', () => {
+    closeModal();
+
+    // reset state after closing
+    setTimeout(() => {
+      successPanel.classList.add('hidden');
+      formContainer.classList.remove('hidden');
+      form.reset();
+    }, 200);
+  });
+</script>
+
 </Layout>
