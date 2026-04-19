@@ -5,12 +5,13 @@ export type SiteSocialLink = {
 };
 
 export type SiteLinkCard = {
-  href: string;
+  href?: string;
   title: string;
   subtitle: string;
   icon: string;
   trailingIcon: string;
   style: string;
+  isContact?: boolean;
 };
 
 export const site = {
@@ -64,38 +65,47 @@ export const site = {
     },
   ] satisfies SiteSocialLink[],
 
-  linkCards: [
-    {
-      href: 'https://cool.industries',
-      title: 'Cool Industries',
-      subtitle: 'Cool solutions for a cool world.',
-      icon: '🧊',
-      trailingIcon: '🧊',
-      style: 'background-color: rgba(250, 204, 21, 0.125); color: rgb(250, 204, 21);',
-    },
-    {
-      href: 'https://yerp.io/',
-      title: 'YERP!',
-      subtitle: 'Your Emergency Response Platform',
-      icon: '🙋‍♂️',
-      trailingIcon: '🙋‍♂️',
-      style: 'background-color: rgba(59, 130, 246, 0.125); color: rgb(59, 130, 246);',
-    },
-    {
-      href: 'https://punkswithlunch.com',
-      title: 'South Philly Punks with Lunch',
-      subtitle: 'Street-Based Mutual Aid & Harm Reduction',
-      icon: '🍲',
-      trailingIcon: '🍲',
-      style: 'background-color: rgba(132, 204, 22, 0.125); color: rgb(132, 204, 22);',
-    },
-    {
-      href: 'https://harmreduction.works/',
-      title: 'Harm Reduction Works',
-      subtitle: 'Support groups for practicing & learning harm reduction',
-      icon: '🫂',
-      trailingIcon: '🫂',
-      style: 'background-color: rgba(244, 63, 94, 0.125); color: rgb(244, 63, 94);',
-    },
-  ] satisfies SiteLinkCard[],
+linkCards: [
+  {
+    href: 'https://cool.industries',
+    title: 'Cool Industries',
+    subtitle: 'Cool solutions for a cool world.',
+    icon: '🧊',
+    trailingIcon: '🧊',
+    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+  },
+  {
+    href: 'https://yerp.io/',
+    title: 'YERP!',
+    subtitle: 'Your Emergency Response Platform',
+    icon: '🙋‍♂️',
+    trailingIcon: '🙋‍♂️',
+    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+  },
+  {
+    href: 'https://punkswithlunch.com',
+    title: 'South Philly Punks with Lunch',
+    subtitle: 'Street-Based Mutual Aid & Harm Reduction',
+    icon: '🍲',
+    trailingIcon: '🍲',
+    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+  },
+  {
+    href: 'https://harmreduction.works/',
+    title: 'Harm Reduction Works',
+    subtitle: 'Support groups for practicing & learning harm reduction',
+    icon: '🫂',
+    trailingIcon: '🫂',
+    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+  },
+  {
+    // No href for contact card
+    title: 'Contact Me',
+    subtitle: 'Send me a message',
+    icon: '📧',
+    trailingIcon: '📧',
+    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+    isContact: true,  // Flag to identify this card
+  },
+] satisfies SiteLinkCard[],
 } as const;
