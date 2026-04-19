@@ -9,51 +9,57 @@
     id="modalContent"
     class="bg-neutral-900 text-white w-full max-w-md p-6 rounded-2xl shadow-xl relative transform scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
 
-<div id="modalHeader" class="flex justify-between items-center mb-2 -mt-3">
-  <h2 class="text-xl font-semibold">Send me a message</h2>
-  <button 
-    id="closeModal" 
-    class="text-white/70 hover:text-white transition-colors p-1 cursor-pointer"
-    aria-label="Close"
-  >
-    ✕
-  </button>
-</div>
+    <div id="modalHeader" class="flex justify-between items-center mb-2 -mt-3">
+        <h2 class="text-xl font-semibold">Send me a message</h2>
+        <button 
+            id="closeModal" 
+            class="text-white/70 hover:text-white transition-colors p-1 cursor-pointer"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+    </div>
 
     <div id="formContainer" class="transition-all duration-200">
-      <form name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
+            
+            <!-- Honeypot field - hidden from humans, bots will fill it -->
+            <div style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;" aria-hidden="true">
+                <label for="bot-field">Don't fill this out if you're human:</label>
+                <input type="text" name="bot-field" id="bot-field" tabindex="-1" autocomplete="off" />
+            </div>
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          required
-          class="w-full mb-3 p-2 rounded bg-black/30 border border-white/20"
-        />
+            <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+            class="w-full mb-3 p-2 rounded bg-black/30 border border-white/20"
+            />
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          required
-          class="w-full mb-3 p-2 rounded bg-black/30 border border-white/20"
-        />
+            <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            class="w-full mb-3 p-2 rounded bg-black/30 border border-white/20"
+            />
 
-        <textarea
-          name="message"
-          placeholder="Message"
-          required
-          class="w-full h-48 mb-3 p-2 rounded bg-black/30 border border-white/20 resize-y"
-        ></textarea>
+            <textarea
+            name="message"
+            placeholder="Message"
+            required
+            class="w-full h-48 mb-3 p-2 rounded bg-black/30 border border-white/20 resize-y"
+            ></textarea>
 
-        <button
-          type="submit"
-          class="w-full bg-white text-black font-medium p-2 rounded-lg hover:bg-white/90"
-        >
-          Send
-        </button>
-      </form>
+            <button
+            type="submit"
+            class="w-full bg-white text-black font-medium p-2 rounded-lg hover:bg-white/90"
+            >
+            Send
+            </button>
+            </form>
     </div>
 
     <div id="successPanel" class="hidden text-center space-y-4">
