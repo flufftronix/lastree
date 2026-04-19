@@ -34,21 +34,20 @@
       }
     }
 
-
     window.openModal = function() {
-    resetModalToFormState();
-    if (!modal) return;
-    
-    modal.classList.remove('pointer-events-none');
-    
-    requestAnimationFrame(() => {
+      resetModalToFormState();
+      if (!modal) return;
+      
+      modal.classList.remove('pointer-events-none');
+      
+      requestAnimationFrame(() => {
         modal.classList.remove('opacity-0', 'bg-black/0');
         modal.classList.add('opacity-100', 'bg-black/60');
         if (modalContent) {
-        modalContent.classList.remove('scale-95', 'opacity-0');
-        modalContent.classList.add('scale-100', 'opacity-100');
+          modalContent.classList.remove('scale-95', 'opacity-0');
+          modalContent.classList.add('scale-100', 'opacity-100');
         }
-    });
+      });
     }
 
     function closeModal() {
@@ -71,6 +70,18 @@
     if (form) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // Get the name value from the form
+        const nameInput = form.querySelector('input[name="name"]');
+        const nameValue = nameInput ? nameInput.value.trim() : 'Someone';
+        
+        // Set the subject field dynamically with domain prefix
+        const subjectField = form.querySelector('input[name="subject"]');
+        if (subjectField) {
+          const domain = window.location.hostname;
+          subjectField.value = `[${domain}] New message from ${nameValue}`;
+        }
+        
         const data = new FormData(form);
 
         try {
