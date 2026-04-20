@@ -22,7 +22,7 @@ export const site = {
     description:
       'Designer, tinkerer, developer, harm reductionist.',
     url: 'https://lasday.com',
-    image: 'https://i.imgur.com/jmMF1e6.jpeg',
+    image: 'https://i.imgur.com/4O5023q.jpeg',
     siteName: 'Michael Lasday',
     locale: 'en_US',
     twitterSite: '@flufftronix',
@@ -36,7 +36,7 @@ export const site = {
   },
 
   profile: {
-    avatarSrc: 'https://i.imgur.com/jmMF1e6.jpeg',
+    avatarSrc: 'https://i.imgur.com/eeK4hx7.png',
     name: 'Michael Lasday',
     handle: '@flufftronix',
     bio: 'Designer, tinkerer, developer, harm reductionist.',
