@@ -66,14 +66,14 @@ export const site = {
   ] satisfies SiteSocialLink[],
 
 linkCards: [
-  {
-    href: 'https://cool.industries',
-    title: 'Cool Industries',
-    subtitle: 'Cool solutions for a cool world.',
-    icon: '🧊',
-    trailingIcon: '🧊',
-    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
-  },
+//  {
+//    href: 'https://cool.industries',
+//    title: 'Cool Industries',
+//    subtitle: 'Cool solutions for a cool world.',
+//    icon: '🧊',
+//    trailingIcon: '🧊',
+//    style: 'background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);',
+//  },
   {
     href: 'https://yerp.io/',
     title: 'YERP!',
